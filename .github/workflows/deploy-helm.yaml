@@ -1,0 +1,26 @@
+name: deploy Helm chart
+
+on:
+  workflow_dispatch:
+    inputs:
+      namespace:
+        default: "app"
+        type: choice
+        options:
+        - app
+        - default
+
+
+jobs:
+  deploy-helm:
+    runs-on: [self-hosted]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Helm
+        uses: azure/setup-helm@v2.1
+        with:
+          version: "3.8.0"
+      - name: Deploy Helm Chart
+        run: |
+          helm install --namespace "${{ inputs.namespace }}" simple-webapp ./simple-webapp
+
