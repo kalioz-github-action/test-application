@@ -1,0 +1,91 @@
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: RunnerDeployment
+metadata:
+  name: github-action-runner
+  namespace: github-action-runners
+  annotations:
+    created-by: clement-loiselet
+spec:
+  replicas: 1
+  template:
+    spec:
+      organization: kalioz-github-action
+      labels:
+        # only use the "deployer" tag to reduce the amount of jobs getting on this pod
+        - deployer
+      env: []
+      # ephemeral: clean the environment between each job. it more accurately follows GA runners.
+      ephemeral: true
+
+      serviceAccountName: github-action-deployer
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: github-action-deployer
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+ name: read-write
+ namespace: default
+rules:
+  - apiGroups:
+    - ""
+    resources: ["*"]
+    verbs:
+    - get
+    - list
+    - watch
+    - create
+    - update
+    - patch
+    - delete
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+ name: read-write
+ namespace: app
+rules:
+  - apiGroups:
+    - ""
+    resources: ["*"]
+    verbs:
+    - get
+    - list
+    - watch
+    - create
+    - update
+    - patch
+    - delete
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: github-action-deployer-rw
+  namespace: app
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: read-write
+subjects:
+- kind: ServiceAccount
+  name: github-action-deployer
+  namespace: github-action-runners
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: github-action-deployer-rw
+  namespace: default
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: read-write
+subjects:
+- kind: ServiceAccount
+  name: github-action-deployer
+  namespace: github-action-runners
