@@ -22,5 +22,5 @@ jobs:
           version: "3.8.0"
       - name: Deploy Helm Chart
         run: |
-          helm install --namespace "${{ inputs.namespace }}" simple-webapp ./simple-webapp
+          helm install --namespace "${{ inputs.namespace }}" simple-webapp ./chart/simple-webapp
 
