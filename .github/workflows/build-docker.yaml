@@ -5,8 +5,8 @@ on:
     # branches:
     #   - 'main'
     paths:
-      - .github/workflows/build-docker.yml
-      - docker/*
+      - .github/workflows/build-docker.yaml
+      - 'docker/**'
 
 env:
   IMAGE_PREFIX: kalioz/test-nginx-autobuild
