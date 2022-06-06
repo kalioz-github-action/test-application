@@ -1,7 +1,7 @@
 apiVersion: actions.summerwind.dev/v1alpha1
 kind: RunnerDeployment
 metadata:
-  name: github-action-runner
+  name: github-action-runner-deploy
   namespace: github-action-runners
   annotations:
     created-by: clement-loiselet
@@ -24,6 +24,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: github-action-deployer
+  namespace: github-action-runners
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1
