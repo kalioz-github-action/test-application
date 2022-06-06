@@ -13,7 +13,7 @@ env:
 
 jobs:
   docker:
-    uses: kalioz-github-actions/github-actions/.github/workflows/reusable_docker_build.yaml@cloiselet/reusable-workflow-docker-build
+    uses: kalioz-github-action/github-actions/.github/workflows/reusable_docker_build.yaml@cloiselet/reusable-workflow-docker-build
     with:
       context: "."
       dockerfile: "Dockerfile"
