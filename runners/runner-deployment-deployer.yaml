@@ -34,7 +34,7 @@ metadata:
  namespace: default
 rules:
   - apiGroups:
-    - ""
+    - "*"
     resources: ["*"]
     verbs:
     - get
@@ -52,7 +52,7 @@ metadata:
  namespace: app
 rules:
   - apiGroups:
-    - ""
+    - "*"
     resources: ["*"]
     verbs:
     - get
