@@ -6,7 +6,7 @@ on:
     #   - 'main'
     paths:
       - .github/workflows/build-helm.yml
-      - helm/*
+      - helm/**
 
 env:
   IMAGE_PREFIX: kalioz/test-nginx-autobuild
