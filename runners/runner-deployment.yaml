@@ -1,0 +1,18 @@
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: RunnerDeployment
+metadata:
+  name: github-action-runner
+  namespace: github-action-runners
+  annotations:
+    created-by: clement-loiselet
+spec:
+  replicas: 3
+  template:
+    spec:
+      organization: kalioz-github-action
+      labels:
+        - self-hosted-minikube
+        - docker-in-docker
+      env: []
+      # ephemeral: clean the environment between each job. it more accurately follows GA runners.
+      ephemeral: true

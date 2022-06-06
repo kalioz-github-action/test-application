@@ -1,0 +1,19 @@
+# runner.yaml
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: Runner
+metadata:
+  name: my-little-runner
+  namespace: github-action-runners
+spec:
+  organization: kalioz-github-action
+  
+  # recreate the pod after the job is done. ensure there is no data persistence across multiple jobs.
+  ephemeral: true
+
+  labels:
+  # self-hosted is already added by github - however the webhook autoscaler doesn't know about it and won't work if it isn't manually added.
+  - self-hosted
+
+  # other labels that will help jobs run on the good pods
+  - self-hosted-minikube
+  - docker-in-docker
