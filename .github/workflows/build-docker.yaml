@@ -8,14 +8,12 @@ on:
       - .github/workflows/build-docker.yaml
       - 'docker/**'
 
-env:
-  IMAGE_PREFIX: kalioz/test-nginx-autobuild
-
 jobs:
   docker:
     uses: kalioz-github-action/github-actions/.github/workflows/reusable_docker_build.yaml@cloiselet/reusable-workflow-docker-build
     with:
       context: "docker"
+      image_prefix: "kalioz/test-nginx-autobuild"
       dockerfile: "docker/Dockerfile"
       use_docker_in_docker: true # quicker build, but need to be used in self-hosted runners.
     secrets:
