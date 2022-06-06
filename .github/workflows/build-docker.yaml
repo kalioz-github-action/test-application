@@ -15,8 +15,8 @@ jobs:
   docker:
     uses: kalioz-github-action/github-actions/.github/workflows/reusable_docker_build.yaml@cloiselet/reusable-workflow-docker-build
     with:
-      context: "."
-      dockerfile: "Dockerfile"
+      context: "docker"
+      dockerfile: "docker/Dockerfile"
       use_docker_in_docker: false # quicker build, but need to be used in self-hosted runners.
     secrets:
       DOCKERHUB_USER: "${{ secrets.DOCKERHUB_USER }}"
