@@ -6,13 +6,10 @@ on:
     #   - 'main'
     paths:
       - .github/workflows/build-helm.yml
-      - helm/*
-
-env:
-  IMAGE_PREFIX: kalioz/test-nginx-autobuild
+      - helm/**
 
 jobs:
-  docker:
+  helm:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -20,5 +17,5 @@ jobs:
       - name: Package and publish Helm Chart
         uses: kalioz-github-action/github-actions/actions/package-helm-chart-chartmuseum@cloiselet/feat-add-helm-action
         with:
-          folder: "charts/simple-webapp"
+          folder: "helm/simple-webapp"
           chartmuseum_url: http://chartmuseum.chartmuseum.svc.cluster.local:8080
