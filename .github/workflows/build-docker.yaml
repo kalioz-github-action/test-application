@@ -35,8 +35,6 @@ jobs:
           context: docker
           file: docker/Dockerfile
           push: true
-          build-args: |
-            VERSION=${{ env.VERSION }}-ying
           tags: |
             ${{ env.IMAGE_PREFIX }}:latest
             ${{ env.IMAGE_PREFIX }}:${{ env.VERSION }}
