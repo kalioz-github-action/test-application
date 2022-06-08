@@ -2,8 +2,6 @@ name: build-push-docker
 
 on:
   push:
-    # branches:
-    #   - 'main'
     paths:
       - .github/workflows/build-docker.yml
       - docker/*
