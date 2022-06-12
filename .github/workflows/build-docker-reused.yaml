@@ -1,0 +1,22 @@
+name: build-push-docker
+
+on:
+  push:
+    branches:
+      - main
+      - docker-reusable-worflow
+    paths:
+      - .github/workflows/build-docker.yaml
+      - 'docker/**'
+
+jobs:
+  docker:
+    uses: kalioz-github-action/github-actions/.github/workflows/reusable_docker_build.yaml@cloiselet/reusable-workflow-docker-build
+    with:
+      context: "docker"
+      image_prefix: "kalioz/test-nginx-autobuild"
+      dockerfile: "docker/Dockerfile"
+      use_docker_in_docker: true # quicker build, but need to be used in self-hosted runners.
+    secrets:
+      DOCKERHUB_USER: "${{ secrets.DOCKERHUB_USER }}"
+      DOCKERHUB_TOKEN: "${{ secrets.DOCKERHUB_TOKEN }}"
