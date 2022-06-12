@@ -12,6 +12,7 @@ env:
   IMAGE_PREFIX: kalioz/test-nginx-autobuild
   DOCKERFILE: docker/Dockerfile
 
+
 jobs:
   docker-lint:
     runs-on: ubuntu-latest
