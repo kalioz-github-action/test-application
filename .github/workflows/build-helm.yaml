@@ -14,11 +14,16 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
-
+      
+      - name: Install Helm
+        uses: azure/setup-helm@v2.1
+        with:
+          version: "3.8.0"
+      
       - name: Package and publish Helm Chart
         # fix the commit in case of public repos to ensure you can't suffer from third party attack.
-        # you can also use tags, branches...                                            @package-helm-chart-chartmuseum-v1.0.0
-        uses: kalioz-github-action/github-actions/actions/package-helm-chart-chartmuseum@70bddc88c659bc7039792feae8f678699fe9f3fd
+        # you can also use tags, branches...                                            @package-helm-chart-chartmuseum-v2.0.0
+        uses: kalioz-github-action/github-actions/actions/package-helm-chart-chartmuseum@52be46dff55a00188e974826612ef7a58bb8fd19
         with:
           folder: "helm/simple-webapp"
           chartmuseum_url: http://chartmuseum.chartmuseum.svc.cluster.local:8080
